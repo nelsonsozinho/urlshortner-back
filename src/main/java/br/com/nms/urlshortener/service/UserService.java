@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -41,6 +42,12 @@ public class UserService implements UserDetailsService {
         }
 
         return null;
+    }
+
+    public void updateLastLogin() {
+        User user = loadCurrentUser();
+        user.setLastLogin(new Date());
+        userRepository.save(user);
     }
 
 }

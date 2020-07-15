@@ -10,8 +10,8 @@ server:
     key-store: classpath:key/ssl-server.jks
     key-store-provider: SUN
     key-store-type: JKS
-  servlet:
-    contextPath: /shortener/api
+#  servlet:
+#    contextPath: /shortener/api
 
 spring:
   profiles:

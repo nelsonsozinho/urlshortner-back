@@ -9,6 +9,7 @@ import br.com.nms.urlshortener.domain.User;
 import br.com.nms.urlshortener.filter.JwtProvider;
 import br.com.nms.urlshortener.repository.RoleRepository;
 import br.com.nms.urlshortener.repository.UserRepository;
+import br.com.nms.urlshortener.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ import java.util.Set;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth/")
 public class AuthenticationController {
 
     @Autowired
@@ -33,6 +34,9 @@ public class AuthenticationController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     RoleRepository roleRepository;
@@ -54,8 +58,9 @@ public class AuthenticationController {
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
         String jwt = jwtProvider.generateJwtToken(authentication);
+        userService.updateLastLogin();
+
         return ResponseEntity.ok(new JwtResponse(jwt));
     }
 
