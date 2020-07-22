@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-import javax.servlet.ServletRegistration;
-
 @SpringBootApplication
 public class UrlshortenerApplication {
 
